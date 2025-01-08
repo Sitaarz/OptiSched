@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OptiSched", "OptiSched\OptiSched.csproj", "{63026184-BC24-4764-A481-3B1734ABE29E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OptiSched.Tests", "OptiSched.Tests\OptiSched.Tests.csproj", "{2A847129-7F8B-4908-9BE0-5F4FC49ABAE4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OptiSched.Domain", "OptiSched.Domain\OptiSched.Domain.csproj", "{01BDE200-7A4A-41E7-A188-C5BAECEFD07F}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{63026184-BC24-4764-A481-3B1734ABE29E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{63026184-BC24-4764-A481-3B1734ABE29E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{63026184-BC24-4764-A481-3B1734ABE29E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{63026184-BC24-4764-A481-3B1734ABE29E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2A847129-7F8B-4908-9BE0-5F4FC49ABAE4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2A847129-7F8B-4908-9BE0-5F4FC49ABAE4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2A847129-7F8B-4908-9BE0-5F4FC49ABAE4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2A847129-7F8B-4908-9BE0-5F4FC49ABAE4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{01BDE200-7A4A-41E7-A188-C5BAECEFD07F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{01BDE200-7A4A-41E7-A188-C5BAECEFD07F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{01BDE200-7A4A-41E7-A188-C5BAECEFD07F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{01BDE200-7A4A-41E7-A188-C5BAECEFD07F}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal

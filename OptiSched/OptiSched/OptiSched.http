@@ -1,0 +1,7 @@
+@OptiSched_HostAddress = https://localhost:44338
+
+GET {{OptiSched_HostAddress}}/user
+Accept: application/json
+Authorization: Bearer "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJVc2VySWQiOiI5YWNjOWI2OC0yYjNiLTQ5ZTctOTI4NS01NDEyZmJmYTE0MjciLCJuYmYiOjE3MzM3ODExOTAsImV4cCI6MTczNDM4NTk5MCwiaWF0IjoxNzMzNzgxMTkwfQ.p86b0VlQtD-VXw-csqNfNApmm0u9tutkiHFjpioLd90"
+
+###

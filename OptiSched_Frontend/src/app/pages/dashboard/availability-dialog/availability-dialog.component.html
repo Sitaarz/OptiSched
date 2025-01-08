@@ -1,0 +1,20 @@
+<kendo-dialog
+  title="Add availability"
+  *ngIf="dialogOpened"
+  (close)="closeDialog()"
+  [minWidth]="500"
+  [width]="800"
+>
+  <kendo-scheduler
+    [kendoSchedulerBinding]="events"
+    [kendoSchedulerReactiveEditing]="createFormGroup"
+    [selectedDate]="selectedDate"
+    style="height: 600px;"
+  >
+    <kendo-scheduler-week-view startTime="07:00" endTime="18:00"></kendo-scheduler-week-view>
+  </kendo-scheduler>
+
+  <kendo-dialog-actions>
+    <button kendoButton (click)="onSubmit()">Save</button>
+  </kendo-dialog-actions>
+</kendo-dialog>>

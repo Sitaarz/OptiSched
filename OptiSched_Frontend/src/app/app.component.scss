@@ -1,0 +1,19 @@
+:host{
+  display: flex;
+  flex-direction: column;
+  height: 100%; /* Pełna wysokość ekranu */
+}
+
+.navbar {
+  flex: 0 0 auto; /* Zapewnia, że navbar nie będzie się rozciągał */
+  color: white;
+  display: flex;
+  align-items: center;
+  height: 5%;
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  flex: 1
+}

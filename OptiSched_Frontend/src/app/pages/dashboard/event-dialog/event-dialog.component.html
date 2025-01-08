@@ -1,0 +1,30 @@
+<kendo-dialog
+  title="Add meeting"
+  *ngIf="addMeetingDialogOpened"
+  (close)="closeDialog()"
+  [minWidth]="250"
+  [width]="450"
+>
+  <form [formGroup]="formGroup">
+    <kendo-label text="Guest">
+      <kendo-autocomplete
+        [data]="autocompleteData"
+        placeholder="e.g. Adam Nowak"
+        formControlName="guest"
+      >
+      </kendo-autocomplete>
+    </kendo-label>
+    <kendo-label text="Duration">
+      <kendo-numerictextbox
+        format="# h"
+        [step]="1"
+        formControlName="duration"
+        [min]="1"
+        [max]="8"
+      ></kendo-numerictextbox>
+    </kendo-label>
+  </form>
+  <kendo-dialog-actions>
+    <button kendoButton (click)="onSubmit()" [disabled]="formGroup.invalid">Add</button>
+  </kendo-dialog-actions>
+</kendo-dialog>>

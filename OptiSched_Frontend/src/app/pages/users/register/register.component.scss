@@ -1,0 +1,64 @@
+/* Full viewport height and center the content */
+:host{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(to right, #6a11cb, #2575fc); /* Gradient background */
+  font-family: 'Arial', sans-serif; /* Modern font */
+  flex: 1;
+}
+
+/* Card styling */
+.login-card {
+  width: 400px; /* Card width */
+  padding: 20px; /* Padding for better spacing */
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2); /* Enhanced shadow */
+  border-radius: 12px; /* Rounded corners */
+  background-color: white; /* White background for the card */
+  transition: transform 0.3s; /* Smooth transition for hover effect */
+}
+
+/* Card title styling */
+.login-title {
+  text-align: center;
+  font-size: 28px; /* Larger title */
+  margin-bottom: 20px; /* Space below title */
+  color: #333; /* Darker color for title */
+}
+
+/* Form field styling */
+mat-form-field {
+  width: 100%; /* Full width for form fields */
+  margin-bottom: 16px; /* Space between fields */
+}
+
+/* Button styling */
+button {
+  width: 100%; /* Full width button */
+  background-color: #1976d2; /* Primary color */
+  color: white; /* White text */
+  font-weight: bold; /* Bold text */
+  transition: background-color 0.3s, transform 0.3s; /* Smooth transition */
+}
+
+/* Button hover effect */
+button:hover {
+  background-color: #155a8a; /* Darker shade on hover */
+  transform: translateY(-2px); /* Slight lift effect */
+}
+
+/* Forgot password link styling */
+.forgot-password {
+  text-align: center;
+  margin-top: 10px; /* Space above link */
+}
+
+.forgot-password a {
+  color: #1976d2; /* Primary color for link */
+  text-decoration: none; /* Remove underline */
+  font-weight: bold; /* Bold text */
+}
+
+.forgot-password a:hover {
+  text-decoration: underline; /* Underline on hover */
+}
