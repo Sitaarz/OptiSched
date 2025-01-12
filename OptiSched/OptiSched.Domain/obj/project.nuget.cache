@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "x+qiSj4UEtU=",
+  "dgSpecHash": "ExNwtWNsa3A=",
   "success": true,
-  "projectFilePath": "C:\\Users\\kryst\\RiderProjects\\OptiSchedRoot\\OptiSched\\OptiSched.Domain\\OptiSched.Domain.csproj",
+  "projectFilePath": "C:\\Users\\kryst\\OneDrive\\Desktop\\semestr 7\\OptiSched\\OptiSched\\OptiSched.Domain\\OptiSched.Domain.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\kryst\\.nuget\\packages\\coverlet.collector\\6.0.0\\coverlet.collector.6.0.0.nupkg.sha512",
     "C:\\Users\\kryst\\.nuget\\packages\\microsoft.codecoverage\\17.8.0\\microsoft.codecoverage.17.8.0.nupkg.sha512",

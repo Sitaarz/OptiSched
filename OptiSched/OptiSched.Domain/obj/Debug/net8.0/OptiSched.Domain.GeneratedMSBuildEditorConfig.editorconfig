@@ -8,6 +8,6 @@ build_property.PlatformNeutralAssembly =
 build_property.EnforceExtendedAnalyzerRules = 
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = OptiSched.Domain
-build_property.ProjectDir = C:\Users\kryst\RiderProjects\OptiSchedRoot\OptiSched\OptiSched.Domain\
+build_property.ProjectDir = C:\Users\kryst\OneDrive\Desktop\semestr 7\OptiSched\OptiSched\OptiSched.Domain\
 build_property.EnableComHosting = 
 build_property.EnableGeneratedComInterfaceComImportInterop = 

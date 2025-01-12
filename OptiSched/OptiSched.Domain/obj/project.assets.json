@@ -987,11 +987,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\kryst\\RiderProjects\\OptiSchedRoot\\OptiSched\\OptiSched.Domain\\OptiSched.Domain.csproj",
+      "projectUniqueName": "C:\\Users\\kryst\\OneDrive\\Desktop\\semestr 7\\OptiSched\\OptiSched\\OptiSched.Domain\\OptiSched.Domain.csproj",
       "projectName": "OptiSched.Domain",
-      "projectPath": "C:\\Users\\kryst\\RiderProjects\\OptiSchedRoot\\OptiSched\\OptiSched.Domain\\OptiSched.Domain.csproj",
+      "projectPath": "C:\\Users\\kryst\\OneDrive\\Desktop\\semestr 7\\OptiSched\\OptiSched\\OptiSched.Domain\\OptiSched.Domain.csproj",
       "packagesPath": "C:\\Users\\kryst\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\kryst\\RiderProjects\\OptiSchedRoot\\OptiSched\\OptiSched.Domain\\obj\\",
+      "outputPath": "C:\\Users\\kryst\\OneDrive\\Desktop\\semestr 7\\OptiSched\\OptiSched\\OptiSched.Domain\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\kryst\\AppData\\Roaming\\NuGet\\NuGet.Config",

@@ -5107,11 +5107,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\kryst\\RiderProjects\\OptiSchedRoot\\OptiSched\\OptiSched\\OptiSched.csproj",
+      "projectUniqueName": "C:\\Users\\kryst\\OneDrive\\Desktop\\semestr 7\\OptiSched\\OptiSched\\OptiSched\\OptiSched.csproj",
       "projectName": "OptiSched",
-      "projectPath": "C:\\Users\\kryst\\RiderProjects\\OptiSchedRoot\\OptiSched\\OptiSched\\OptiSched.csproj",
+      "projectPath": "C:\\Users\\kryst\\OneDrive\\Desktop\\semestr 7\\OptiSched\\OptiSched\\OptiSched\\OptiSched.csproj",
       "packagesPath": "C:\\Users\\kryst\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\kryst\\RiderProjects\\OptiSchedRoot\\OptiSched\\OptiSched\\obj\\",
+      "outputPath": "C:\\Users\\kryst\\OneDrive\\Desktop\\semestr 7\\OptiSched\\OptiSched\\OptiSched\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\kryst\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -5129,8 +5129,8 @@
         "net8.0": {
           "targetAlias": "net8.0",
           "projectReferences": {
-            "C:\\Users\\kryst\\RiderProjects\\OptiSchedRoot\\OptiSched\\OptiSched.Domain\\OptiSched.Domain.csproj": {
-              "projectPath": "C:\\Users\\kryst\\RiderProjects\\OptiSchedRoot\\OptiSched\\OptiSched.Domain\\OptiSched.Domain.csproj"
+            "C:\\Users\\kryst\\OneDrive\\Desktop\\semestr 7\\OptiSched\\OptiSched\\OptiSched.Domain\\OptiSched.Domain.csproj": {
+              "projectPath": "C:\\Users\\kryst\\OneDrive\\Desktop\\semestr 7\\OptiSched\\OptiSched\\OptiSched.Domain\\OptiSched.Domain.csproj"
             }
           }
         }

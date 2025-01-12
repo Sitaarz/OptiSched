@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "EFnE5jgf5gY=",
+  "dgSpecHash": "/DxcTxhjYj0=",
   "success": true,
-  "projectFilePath": "C:\\Users\\kryst\\RiderProjects\\OptiSchedRoot\\OptiSched\\OptiSched.Tests\\OptiSched.Tests.csproj",
+  "projectFilePath": "C:\\Users\\kryst\\OneDrive\\Desktop\\semestr 7\\OptiSched\\OptiSched\\OptiSched.Tests\\OptiSched.Tests.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\kryst\\.nuget\\packages\\coverlet.collector\\6.0.0\\coverlet.collector.6.0.0.nupkg.sha512",
     "C:\\Users\\kryst\\.nuget\\packages\\microsoft.aspnetcore.authentication.jwtbearer\\8.0.11\\microsoft.aspnetcore.authentication.jwtbearer.8.0.11.nupkg.sha512",
