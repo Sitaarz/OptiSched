@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("OptiSched.Domain")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+a975514bba3124b4b6a6157679d492bb1907c2bc")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+56a781eb9570acb671b992fab77f3ba3199e1876")]
 [assembly: System.Reflection.AssemblyProductAttribute("OptiSched.Domain")]
 [assembly: System.Reflection.AssemblyTitleAttribute("OptiSched.Domain")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
