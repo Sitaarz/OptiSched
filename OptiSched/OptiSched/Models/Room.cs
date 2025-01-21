@@ -1,8 +1,10 @@
-﻿namespace OptiSched.Models;
+﻿using Microsoft.EntityFrameworkCore;
+
+namespace OptiSched.Models;
 
 public class Room
 {
-    public int Id{get;set;}
-    
-    public virtual Schedule Schedule{get;set;}
+    public int Id { get; set; }
+
+    public virtual DbSet<Schedule> Schedules { get; set; }
 }

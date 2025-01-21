@@ -71,7 +71,8 @@ builder.Services
     .AddEntityFrameworkStores<AppDbContext>();
 
 builder.Services.AddDbContext<AppDbContext>(options =>
-    options.UseSqlite(builder.Configuration.GetConnectionString("SqLiteConnectionString")));
+    options.UseSqlite(builder.Configuration.GetConnectionString("SqLiteConnectionString"))
+        .LogTo(Console.WriteLine, LogLevel.None));
 
 
 var app = builder.Build();
@@ -97,7 +98,7 @@ app.MapGroup("/api").MapIdentityApi<AppUser>();
 
 app.MapPost("/api/signup", [AllowAnonymous] async (
     UserManager<AppUser> userManager,
-    [FromBody] UserRegistrationModel userRegistrationModel
+    [FromBody] UserRegistrationModelDto userRegistrationModel
 ) =>
 {
     var user = new AppUser()
@@ -117,7 +118,7 @@ app.MapPost("/api/signup", [AllowAnonymous] async (
 
 app.MapPost("/api/signin", [AllowAnonymous] async
 (UserManager<AppUser> userManager,
-    [FromBody] UserLoginModel userLoginModel) =>
+    [FromBody] UserLoginModelDto userLoginModel) =>
 {
     var user = await userManager.FindByNameAsync(userLoginModel.Email);
     if (user != null && await userManager.CheckPasswordAsync(user, userLoginModel.Password))
@@ -187,24 +188,25 @@ app.MapGet("/getUsers",
     });
 
 app.MapGet("/getAvailability",
-    [AllowAnonymous] async Task<IResult> (AppDbContext db, ClaimsPrincipal userPrincipal, UserManager<AppUser> manager) =>
+    [AllowAnonymous]
+    async Task<IResult> (AppDbContext db, ClaimsPrincipal userPrincipal, UserManager<AppUser> manager) =>
     {
         var userId = userPrincipal.Claims.FirstOrDefault(claim => claim.Type == "UserId")?.Value;
-        
+
         if (userId == null) return Results.Unauthorized();
 
         var userDetails = await manager.FindByIdAsync(userId);
         if (userDetails == null) return Results.Unauthorized();
 
-        var avabilities = db.Availabilities.ToList().Where( avability => avability.AppUserId == userId )
+        var avabilities = db.Availabilities.ToList().Where(avability => avability.AppUserId == userId)
             .Select(availability => new
             {
-                id = availability.Id, 
+                id = availability.Id,
                 start = availability.StartDate,
                 end = availability.EndDate,
                 title = "available"
             });
-        
+
         return Results.Ok(avabilities);
     });
 
@@ -233,13 +235,13 @@ app.MapPost("/addAvailability", [AllowAnonymous] async Task<IResult> (
         ClaimsPrincipal user,
         UserManager<AppUser> userManager,
         AppDbContext context,
-        [FromBody] List<Availability> userAvailability
+        [FromBody] List<AvailabilityDto> userAvailability
     ) =>
     {
         var userId = user.Claims.FirstOrDefault(c => c.Type == "UserId")?.Value;
         if (userId == null) return Results.Unauthorized();
 
-        var userAccessibilities = userAvailability.Select(availability => new Availabilitie()
+        var userAccessibilities = userAvailability.Select(availability => new Availability()
         {
             AppUserId = userId,
             StartDate = availability.Start,
@@ -266,6 +268,7 @@ app.MapGet("/getSchedule", [AllowAnonymous] async Task<IResult> (AppDbContext db
         join meeting in db.Meetings on schedule.MeetingId equals meeting.Id
         join user1 in db.AppUsers on meeting.UserId1 equals user1.Id
         join user2 in db.AppUsers on meeting.UserId2 equals user2.Id
+        join room in db.Rooms on schedule.RoomId equals room.Id
         select new
         {
             Id = schedule.Id,
@@ -275,43 +278,18 @@ app.MapGet("/getSchedule", [AllowAnonymous] async Task<IResult> (AppDbContext db
             user2Surname = user2.Surname,
             startTime = schedule.StartTime,
             endTime = schedule.EndTime,
+            roomId = schedule.RoomId
         };
-    
+
     return Results.Ok(result);
 });
 
 app.MapPost("/startProgram", [AllowAnonymous] async Task<IResult> (AppDbContext db) =>
 {
-    ProgramService program = new ProgramService(db);
+    var program = new ProgramService(db);
     program.Run();
 
     return Results.Ok();
 });
 
-
 app.Run();
-
-
-public class UserLoginModel
-{
-    public string Email { get; set; }
-    public string Password { get; set; }
-}
-
-public class UserRegistrationModel : UserLoginModel
-{
-    public string Name { get; set; }
-    public string Surname { get; set; }
-}
-
-public class Availability
-{
-    public DateTime Start { get; set; }
-    public DateTime End { get; set; }
-}
-
-public class MeetingDto
-{
-    public string GuestId { get; set; }
-    public int Duration { get; set; }
-}

@@ -8,6 +8,7 @@ import {DOCUMENT, NgIf} from '@angular/common';
 import {AuthService} from '../../../shared/services/auth.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {TOKEN_KEY} from '../../../shared/constants/constants';
+import {EventServiceService} from '../../../shared/services/event-service.service';
 
 
 @Component({
@@ -37,6 +38,7 @@ export class LoginComponent implements OnInit {
     private authService: AuthService,
     private router: Router,
     private activatedRoute: ActivatedRoute,
+    private eventService: EventServiceService,
     @Inject(DOCUMENT) private document: Document) {
     this.localStorage = document.defaultView?.localStorage;
     this.loginForm = this.fb.group({
@@ -58,6 +60,7 @@ export class LoginComponent implements OnInit {
           next: res => {
             localStorage.setItem(TOKEN_KEY, res.toString())
             this.router.navigateByUrl('/dashboard')
+            this.eventService.triggerLogInEvent();
           },
           error: err => {
             this.loginForm.controls['password'].reset()

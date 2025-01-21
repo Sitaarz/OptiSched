@@ -15,5 +15,5 @@ public class AppUser : IdentityUser
 
     public virtual ICollection<Meeting> Meetings { get; set; }
 
-    public virtual ICollection<Availabilitie> Availabilities { get; set; }
+    public virtual ICollection<Availability> Availabilities { get; set; }
 }

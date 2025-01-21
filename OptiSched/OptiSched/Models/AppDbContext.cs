@@ -12,7 +12,7 @@ public class AppDbContext : IdentityDbContext
     public DbSet<AppUser> AppUsers { get; set; }
     public DbSet<Meeting> Meetings { get; set; }
     public DbSet<Schedule> Schedules { get; set; }
-    public DbSet<Availabilitie> Availabilities { get; set; }
+    public DbSet<Availability> Availabilities { get; set; }
     public DbSet<Room> Rooms { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -40,7 +40,7 @@ public class AppDbContext : IdentityDbContext
             .HasForeignKey<Schedule>(s => s.MeetingId); // MeetingId w Schedule jest kluczem obcym
 
         // Relacja jeden do wielu: AppUser -> Accessibility
-        modelBuilder.Entity<Availabilitie>()
+        modelBuilder.Entity<Availability>()
             .HasOne(a => a.AppUser)
             .WithMany(u => u.Availabilities)
             .HasForeignKey(a => a.AppUserId)
@@ -48,8 +48,8 @@ public class AppDbContext : IdentityDbContext
 
         modelBuilder.Entity<Schedule>()
             .HasOne(s => s.Room)
-            .WithOne(r => r.Schedule)
-            .HasForeignKey<Schedule>(s => s.RoomId);
+            .WithMany(r => r.Schedules)
+            .HasForeignKey(s => s.RoomId);
 
         // Ustawienie długości kolumn
         modelBuilder.Entity<AppUser>()

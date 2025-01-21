@@ -9,6 +9,8 @@ public class GeneticSettings
     public int MinutesRangeToMoveDuringMutation { get; set; }
 }
 
+
+
 public static class AppSettings
 {
     public static GeneticSettings GeneticSettings { get; }

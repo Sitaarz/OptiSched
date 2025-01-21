@@ -1,6 +1,6 @@
 ﻿namespace OptiSched.Models;
 
-public class Availabilitie
+public class Availability
 {
     public int Id { get; set; }
     public string AppUserId { get; set; }

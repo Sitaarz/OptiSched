@@ -17,8 +17,8 @@ public interface IProgramService
 public class ProgramService : IProgramService
 {
     public List<Individual> Population { get; private set; }
-    public List<TimePeriod> AvailablePeriods { get; private set; }
-    public static Random Random { get; } = new();
+    private List<TimePeriod> AvailablePeriods { get;  set; }
+    private Random Random { get; } = new();
     private AppDbContext Db { get; }
     private GeneticOperatorsService GeneticOperators { get; }
 
@@ -36,7 +36,16 @@ public class ProgramService : IProgramService
 
         for (var i = 0; i < AppSettings.GeneticSettings.PopulationSize; i++)
         {
-            var randomIndiviudal = CreateRandomIndividual();
+            Individual randomIndiviudal = new();
+            try
+            {
+                randomIndiviudal = CreateRandomIndividual();
+            }
+            catch (ZeroFitnessException ex)
+            {
+                saveScheduleToDatabase(randomIndiviudal);
+            }
+
             newPopulation.Add(randomIndiviudal);
         }
 
@@ -48,7 +57,7 @@ public class ProgramService : IProgramService
         // var sortedPopulation = Population.OrderBy(x => 1.0 / x.Fittness).ToList();
 
         var inverseFitnessSum = 0d;
-        foreach (var individual in population) inverseFitnessSum += 1.0 / individual.Fittness;
+        foreach (var individual in population) inverseFitnessSum += 1.0 / individual.Fitness;
 
         var randomFitness = Random.NextDouble() * inverseFitnessSum;
 
@@ -56,7 +65,7 @@ public class ProgramService : IProgramService
 
         foreach (var individual in population)
         {
-            runningSum += 1.0 / individual.Fittness;
+            runningSum += 1.0 / individual.Fitness;
             if (runningSum >= randomFitness) return individual;
         }
 
@@ -100,44 +109,67 @@ public class ProgramService : IProgramService
     public void Run()
     {
         for (var i = 0; i < AppSettings.GeneticSettings.GenerationNumber; i++)
-        {
-            var newPopulation = Step();
-            foreach (var individual in newPopulation) individual.CountFitness(Db);
-
-            var bestIndividual = newPopulation.OrderBy(x => x.Fittness).FirstOrDefault();
-
-            Console.WriteLine($"bestFitness: {bestIndividual.Fittness}");
-            
-            Population = newPopulation;
-
-            
-            var allSchedules = Db.Schedules;
-            Db.Schedules.RemoveRange(allSchedules);
-            
-            foreach (var meeting in bestIndividual.GeneticMeetings)
+            try
             {
-                var schedule = new Schedule()
-                {
-                    MeetingId = meeting.Id,
-                    StartTime = meeting.StartDate,
-                    EndTime = meeting.EndDate,
-                    RoomId = meeting.RoomId,
-                };
-                
-                Db.Schedules.Add(schedule);
-            }
+                var newPopulation = Step();
+                foreach (var individual in newPopulation)
+                    try
+                    {
+                        individual.CalculateFitness(Db);
+                    }
+                    catch (ZeroFitnessException ex)
+                    {
+                        saveScheduleToDatabase(individual);
+                        throw;
+                    }
 
-            Db.SaveChanges();
-        }
+                var bestIndividual = newPopulation.OrderBy(x => x.Fitness).FirstOrDefault();
+
+
+                Console.WriteLine($"\nGENERATION NUMBER: {i + 1}");
+                Console.WriteLine($"BestFitness: {bestIndividual.Fitness}\n");
+
+                Population = newPopulation;
+
+                saveScheduleToDatabase(bestIndividual);
+            }
+            catch (ZeroFitnessException ex)
+            {
+                break;
+            }
     }
 
 
     private List<Individual> GetElitaryIndividuals(int numberOfIndividuals)
     {
-        var sortedPopulation = Population.OrderBy(x => x.Fittness);
+        var sortedPopulation = Population.OrderBy(x => x.Fitness);
         var elitaryIndividuals = sortedPopulation.Take(numberOfIndividuals).ToList();
 
         return elitaryIndividuals;
+    }
+
+    private void saveScheduleToDatabase(Individual bestIndividual)
+    {
+        var allSchedules = Db.Schedules;
+        Db.Schedules.RemoveRange(allSchedules);
+
+        List<Schedule> schedulesTest = new();
+
+        foreach (var meeting in bestIndividual.GeneticMeetings)
+        {
+            var schedule = new Schedule()
+            {
+                MeetingId = meeting.Id,
+                StartTime = meeting.StartDate,
+                EndTime = meeting.EndDate,
+                RoomId = meeting.RoomId
+            };
+
+            Db.Schedules.Add(schedule);
+            schedulesTest.Add(schedule);
+        }
+
+        Db.SaveChanges();
     }
 
     private void GetAvailablePeriods()
@@ -151,7 +183,7 @@ public class ProgramService : IProgramService
         var currentPeriod = new TimePeriod(availabilities[0].StartDate, availabilities[0].EndDate);
 
         foreach (var availability in availabilities.Skip(1))
-            if (availability.StartDate > currentPeriod.StartTime)
+            if (availability.StartDate > currentPeriod.EndTime)
             {
                 periods.Add(currentPeriod);
                 currentPeriod = new TimePeriod(availability.StartDate, availability.EndDate);
@@ -185,7 +217,7 @@ public class ProgramService : IProgramService
     private Individual CreateRandomIndividual()
     {
         var roomCount = Db.Rooms.Count();
-        var totalDurationOfAvailablePeriods = CountTotalDuration().Minutes;
+        var totalDurationOfAvailablePeriods = (int)CountTotalDuration().TotalMinutes;
         var allDatabaseMeetings = Db.Meetings.ToList();
 
         List<GeneticMeeting> newIndividualMeetings = new();
@@ -198,11 +230,11 @@ public class ProgramService : IProgramService
                 if (availablePeriod.EndTime - availablePeriod.StartTime >= randomMinute)
                 {
                     var startOfMeeting = availablePeriod.StartTime + randomMinute;
-                    var endOfMeeting = availablePeriod.EndTime + randomMinute + meeting.Duration;
+                    var endOfMeeting = startOfMeeting + meeting.Duration;
                     var roomId = Random.Next(roomCount) + 1;
 
                     newIndividualMeetings.Add(new GeneticMeeting(meeting.UserId1, meeting.UserId2, roomId,
-                        startOfMeeting, endOfMeeting));
+                        startOfMeeting, endOfMeeting, meeting.Id, meeting.Duration));
                     break;
                 }
                 else
@@ -211,6 +243,9 @@ public class ProgramService : IProgramService
                 }
         }
 
-        return new Individual(newIndividualMeetings);
+        var newIndividual = new Individual(newIndividualMeetings);
+        newIndividual.CalculateFitness(Db);
+
+        return newIndividual;
     }
 }

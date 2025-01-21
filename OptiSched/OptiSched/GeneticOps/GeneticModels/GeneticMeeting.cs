@@ -6,7 +6,8 @@ public class GeneticMeeting : Meeting
     public DateTime EndDate { get; set; }
     public int RoomId { get; set; }
 
-    public GeneticMeeting(string person1Id, string person2Id, int roomId, DateTime startDate, DateTime endDate)
+    public GeneticMeeting(string person1Id, string person2Id, int roomId, DateTime startDate, DateTime endDate, int id,
+        TimeSpan duration)
     {
         if (startDate > endDate) throw new ArgumentException("Start date cannot be greater than end date");
 
@@ -19,5 +20,7 @@ public class GeneticMeeting : Meeting
         RoomId = roomId;
         StartDate = startDate;
         EndDate = endDate;
+        Id = id;
+        Duration = duration;
     }
 }

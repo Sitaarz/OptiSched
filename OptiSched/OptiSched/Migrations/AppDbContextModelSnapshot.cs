@@ -218,7 +218,7 @@ namespace OptiSched.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
-            modelBuilder.Entity("OptiSched.Models.Availabilitie", b =>
+            modelBuilder.Entity("OptiSched.Models.Availability", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -306,8 +306,7 @@ namespace OptiSched.Migrations
                     b.HasIndex("MeetingId")
                         .IsUnique();
 
-                    b.HasIndex("RoomId")
-                        .IsUnique();
+                    b.HasIndex("RoomId");
 
                     b.ToTable("Schedules");
                 });
@@ -378,10 +377,10 @@ namespace OptiSched.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("OptiSched.Models.Availabilitie", b =>
+            modelBuilder.Entity("OptiSched.Models.Availability", b =>
                 {
                     b.HasOne("OptiSched.Models.AppUser", "AppUser")
-                        .WithMany("Accessibility")
+                        .WithMany("Availabilities")
                         .HasForeignKey("AppUserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -421,8 +420,8 @@ namespace OptiSched.Migrations
                         .IsRequired();
 
                     b.HasOne("OptiSched.Models.Room", "Room")
-                        .WithOne("Schedule")
-                        .HasForeignKey("OptiSched.Models.Schedule", "RoomId")
+                        .WithMany("Schedules")
+                        .HasForeignKey("RoomId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -439,13 +438,12 @@ namespace OptiSched.Migrations
 
             modelBuilder.Entity("OptiSched.Models.Room", b =>
                 {
-                    b.Navigation("Schedule")
-                        .IsRequired();
+                    b.Navigation("Schedules");
                 });
 
             modelBuilder.Entity("OptiSched.Models.AppUser", b =>
                 {
-                    b.Navigation("Accessibility");
+                    b.Navigation("Availabilities");
 
                     b.Navigation("Meetings");
                 });

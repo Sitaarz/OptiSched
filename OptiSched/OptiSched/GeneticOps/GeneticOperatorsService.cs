@@ -28,17 +28,17 @@ public class GeneticOperatorsService : IGeneticOperators
 
         var randomTimeSpan
             = TimeSpan.FromMinutes(Random.Next(0, AppSettings.GeneticSettings.MinutesRangeToMoveDuringMutation + 1));
-        var shouldPlusOrMinus = Random.Next(2) == 0;
+        var shouldPlus = Random.Next(2) == 0;
 
         var choosenMeeting = individual.GeneticMeetings[randomMeetingNumber];
         var newStartTime
-            = shouldPlusOrMinus ? choosenMeeting.StartDate + randomTimeSpan : choosenMeeting.StartDate - randomTimeSpan;
+            = shouldPlus ? choosenMeeting.StartDate + randomTimeSpan : choosenMeeting.StartDate - randomTimeSpan;
         var newEndTime
-            = shouldPlusOrMinus ? choosenMeeting.EndDate + randomTimeSpan : choosenMeeting.EndDate - randomTimeSpan;
+            = shouldPlus ? choosenMeeting.EndDate + randomTimeSpan : choosenMeeting.EndDate - randomTimeSpan;
 
         var newMeeting
             = new GeneticMeeting(choosenMeeting.UserId1, choosenMeeting.UserId2, randomRoomNumber, newStartTime,
-                newEndTime);
+                newEndTime, choosenMeeting.Id, choosenMeeting.Duration);
 
         List<GeneticMeeting> newMeetings = new(individual.GeneticMeetings);
         newMeetings[randomMeetingNumber] = newMeeting;
