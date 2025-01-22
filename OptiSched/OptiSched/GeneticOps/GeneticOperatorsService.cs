@@ -24,7 +24,7 @@ public class GeneticOperatorsService : IGeneticOperators
         var meetingsNumber = individual.GeneticMeetings.Count;
 
         var randomMeetingNumber = Random.Next(meetingsNumber);
-        var randomRoomNumber = Random.Next(randomMeetingNumber) + 1;
+        var randomRoomNumber = Random.Next(roomNumber) + 1;
 
         var randomTimeSpan
             = TimeSpan.FromMinutes(Random.Next(0, AppSettings.GeneticSettings.MinutesRangeToMoveDuringMutation + 1));

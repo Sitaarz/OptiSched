@@ -100,7 +100,7 @@ public class Individual : IIndividual
             var overlapStart = Max(meetings[i].StartDate, meetings[j].StartDate);
             var overlapEnd = Min(meetings[i].EndDate, meetings[j].EndDate);
 
-            if (overlapStart < overlapEnd) error += (int)overlapEnd.Subtract(overlapStart).TotalMinutes * 2;
+            if (overlapStart < overlapEnd && meetings[i].RoomId == meetings[j].RoomId) error += (int)overlapEnd.Subtract(overlapStart).TotalMinutes ;
         }
 
         return error;
@@ -123,7 +123,7 @@ public class Individual : IIndividual
                     var overlapStart = Max(meetings[i].StartDate, meetings[j].StartDate);
                     var overlapEnd = Min(meetings[i].EndDate, meetings[j].EndDate);
 
-                    if (overlapStart < overlapEnd) error += (int)overlapEnd.Subtract(overlapStart).TotalMinutes * 3;
+                    if (overlapStart < overlapEnd) error += (int)overlapEnd.Subtract(overlapStart).TotalMinutes ;
                 }
             }
         }
