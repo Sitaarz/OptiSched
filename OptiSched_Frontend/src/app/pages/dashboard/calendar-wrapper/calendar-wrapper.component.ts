@@ -1,4 +1,4 @@
-import {Component, OnInit} from "@angular/core";
+import {Component, Input, OnInit} from "@angular/core";
 import {KENDO_SCHEDULER, SchedulerEvent,} from "@progress/kendo-angular-scheduler";
 import {UserService} from '../../../shared/services/user.service';
 import {EventServiceService} from '../../../shared/services/event-service.service';
@@ -21,6 +21,8 @@ interface scheduleData {
   styleUrl: './calendar-wrapper.component.scss'
 })
 export class CalendarWrapperComponent implements OnInit {
+
+  @Input() roomNumber = 1
 
   constructor(private userService: UserService, private eventService: EventServiceService) {
   }
@@ -54,6 +56,7 @@ export class CalendarWrapperComponent implements OnInit {
               start: new Date(event.startTime),
               end: new Date(event.endTime),
               title: `${event.user1Name} ${event.user1Surname} - ${event.user2Name} ${event.user2Surname} - room ${event.roomId}`,
+              roomId: event.roomId,
             } as SchedulerEvent
           ))
 
@@ -66,10 +69,15 @@ export class CalendarWrapperComponent implements OnInit {
 
     });
 
+    // this.sortedEvents = this.events.filter((ev: any) => ev.roomId == this.roomNumber);
   }
 
+  // ngOnChanges() {
+  //   this.sortedEvents = this.events.filter((ev: any) => ev.roomId == this.roomNumber);
+  // }
+
   public selectedDate: Date = new Date();
-  public events: SchedulerEvent[] = []
+  public events: any = []
 
 
 }

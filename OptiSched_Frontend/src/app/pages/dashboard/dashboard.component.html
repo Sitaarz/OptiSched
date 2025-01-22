@@ -1,3 +1,23 @@
-<app-calendar-wrapper></app-calendar-wrapper>
+<!--<div>-->
+<!--  <kendo-buttongroup class="meals" selection="single">-->
+<!--    <button-->
+<!--      kendoButton-->
+<!--      [toggleable]="true"-->
+<!--      title="Room 1"-->
+<!--      (click)="onClick(1)"-->
+<!--    >-->
+<!--      Room 1-->
+<!--    </button>-->
+<!--    <button-->
+<!--      kendoButton-->
+<!--      [toggleable]="true"-->
+<!--      title="Room 2"-->
+<!--      (click)="onClick(2)"-->
+<!--    >-->
+<!--      Room 2-->
+<!--    </button>-->
+<!--  </kendo-buttongroup>-->
+<!--</div>-->
+<app-calendar-wrapper [roomNumber]="selectedRoom"></app-calendar-wrapper>
 <app-event-dialog></app-event-dialog>
 <app-availability-dialog></app-availability-dialog>
